@@ -1,9 +1,24 @@
 from bs4 import BeautifulSoup
 import requests
 
-url = 'https://www.scimagojr.com/journalrank.php?page=1&total_size=32958'
-
 # неважная часть началась
+def getDataFromURL(url: str) -> list[list[str]]:
+    page = requests.get(url)
+    if page.status_code != 200:
+        return
+
+    data = []
+    soup = BeautifulSoup(page.text, "html.parser")
+    tag = soup.tbody
+    trtag = tag.findAll('tr')
+
+    for i in trtag:
+        tdtag = i.findAll('td')
+        #tdtag contain 1 element
+        data.append(getData(tdtag))
+
+    return data
+
 
 def getTitle(raw: list[str]) -> str:
     t = raw[1].__str__()
@@ -58,21 +73,9 @@ def getData(raw: list[str]) -> list[str]:
 Title, type, SJR, H index, Tolal docs(2020), Total dosc(3 years), Total refs.(2020), Total cities(3 years), Citable docs(3 years), Cities/docs(2 years), Ref/docs(2020)
 1      2     3    4        5                 6                    7                  8                      9                      10                    11
 '''
+url = 'https://www.scimagojr.com/journalrank.php?page=1&total_size=32958'
 
-page = requests.get(url)
-
-print(page.status_code)
-
-data = []
-
-soup = BeautifulSoup(page.text, "html.parser")
-tag = soup.tbody
-trtag = tag.findAll('tr')
-
-for i in trtag:
-    tdtag = i.findAll('td')
-    #tdtag contain 1 element raw
-    data.append(getData(tdtag))
+data = getDataFromURL(url)
 
 for i in data:
     print(i)
