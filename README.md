@@ -1,2 +1,2 @@
 # dataAnalyze
-This is project to collect, analyze, build diagramm and save them pdf in pdf format
+This is project to collect, analyze, build diagramm and save them in pdf format
