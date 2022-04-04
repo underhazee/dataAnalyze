@@ -36,7 +36,7 @@ def getSJR(raw) -> str:
     t = raw[3].__str__()
     t = t.split(">")
     t = t[1].split("<")
-    return t[0]
+    return t[0].rstrip()
 
 
 def getHIndex(raw) -> str:
