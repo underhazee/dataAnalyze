@@ -20,59 +20,105 @@ def getDataFromURL(url: str) -> list[list[str]]:
     return data
 
 
-def getTitle(raw: list[str]) -> str:
+def getTitle(raw) -> str:
     t = raw[1].__str__()
     t = t.split("<")
     t = t[2].split(">")
     return t[-1]
 
-def getType(raw: list[str]) -> str:
-    pass
 
-def getSJR(raw: list[str]) -> str:
-    pass
+def getType(raw) -> str:
+    t = raw[2].__str__()
+    return t[4:-5]
 
-def getHIndex(raw: list[str]) -> str:
-    pass
 
-def getTotalDocs2020(raw: list[str]) -> str:
-    pass
+def getSJR(raw) -> str:
+    t = raw[3].__str__()
+    t = t.split(">")
+    t = t[1].split("<")
+    return t[0]
 
-def getTotalDocs3year(raw: list[str]) -> str:
-    pass
 
-def getTotalRefs2020(raw: list[str]) -> str:
-    pass
+def getHIndex(raw) -> str:
+    t = raw[4].__str__()
+    return t[4:-5]
 
-def getTotalCities3years(raw: list[str]) -> str:
-    pass
 
-def getCitableDocs3years(raw: list[str]) -> str:
-    pass
+def getTotalDocs2020(raw) -> str:
+    t = raw[5].__str__()
+    return t[4:-5]
 
-def getCitiesDocs2years(raw: list[str]) -> str:
-    pass
 
-def getRefDocs2020(raw: list[str]) -> str:
-    pass
+def getTotalDocs3year(raw) -> str:
+    t = raw[6].__str__()
+    return t[4:-5]
+
+
+def getTotalRefs2020(raw) -> str:
+    t = raw[7].__str__()
+    return t[4:-5]
+
+
+def getTotalCities3years(raw) -> str:
+    t = raw[8].__str__()
+    return t[4:-5]
+
+
+def getCitableDocs3years(raw) -> str:
+    t = raw[9].__str__()
+    return t[4:-5]
+
+
+def getCitiesDocs2years(raw) -> str:
+    t = raw[10].__str__()
+    return t[4:-5]
+
+
+def getRefDocs2020(raw) -> str:
+    t = raw[11].__str__()
+    return t[4:-5]
+
+
+def getCountry(raw) -> str:
+    t = raw[12].__str__()
+    t = t.split('"')
+    return t[1]
 
 # неважная часть закончилась
 # важная часть началась
 
 def getData(raw: list[str]) -> list[str]:
     '''
-    Об функции написать
+    Главная функция, возвращает данные в виде списка с такими елементами:
+    Title, type, SJR, H index, Tolal docs(2020), Total dosc(3 years), Total refs.(2020), Total cities(3 years),
+    0      1     2    3        4                 5                    6                  7
+    Citable docs(3 years), Cities/docs(2 years), Ref/docs(2020), Country
+    8                      9                     10               11
     '''
     filteredData = []
 
     filteredData.append(getTitle(raw))
+    filteredData.append(getType(raw))
+    filteredData.append(getSJR(raw))
+    filteredData.append(getHIndex(raw))
+    filteredData.append(getTotalDocs2020(raw))
+    filteredData.append(getTotalDocs3year(raw))
+    filteredData.append(getTotalRefs2020(raw))
+    filteredData.append(getTotalCities3years(raw))
+    filteredData.append(getCitableDocs3years(raw))
+    filteredData.append(getCitiesDocs2years(raw))
+    filteredData.append(getRefDocs2020(raw))
+    filteredData.append(getCountry(raw))
 
     return filteredData
 
 '''
-Title, type, SJR, H index, Tolal docs(2020), Total dosc(3 years), Total refs.(2020), Total cities(3 years), Citable docs(3 years), Cities/docs(2 years), Ref/docs(2020)
-1      2     3    4        5                 6                    7                  8                      9                      10                    11
+Title, type, SJR, H index, Tolal docs(2020), Total dosc(3 years), Total refs.(2020), Total cities(3 years),
+0      1     2    3        4                 5                    6                  7
+Citable docs(3 years), Cities/docs(2 years), Ref/docs(2020), Country
+8                      9                     10               11
 '''
+
 url = 'https://www.scimagojr.com/journalrank.php?page=1&total_size=32958'
 
 data = getDataFromURL(url)
