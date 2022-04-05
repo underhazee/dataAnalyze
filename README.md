@@ -1,4 +1,5 @@
-# dataAnalyze (EN)
+# dataAnalyze
+*User guide (EN):*
 This is project to collect, analyze, build diagramm and save them in pdf format
 
 How to start working:
@@ -23,7 +24,7 @@ How to create pull request:
 3. Press "contribute" then "open pull request".
 4. Follow instructions.
 
-# dataAnalyze (UA)
+*Інструкція з використання (UA):*
 Цей проект створений для збирання, аналізу, створення діаграм та збереження їх у форматі pdf.
 
 Для початку роботи необхідно:
@@ -49,5 +50,5 @@ How to create pull request:
 3. Натисніть "contribute", потім - "open pull request".
 4. Виконуйте вказані там інструкції.
 
-# dataAnalyze (ru)
-—
+*Инструкция по использоваию (ru)*
+Вчи українську мову.
