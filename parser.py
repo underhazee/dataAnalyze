@@ -92,8 +92,13 @@ def getData(raw: list[str]) -> list[str]:
 
     return filteredData
 
+# неважная часть закончилась
+# важная часть началась
 
 def getDataFromURL(url: str) -> list[list[str]]:
+    '''
+    Get url to parse data
+    '''
     page = requests.get(url)
     if page.status_code != 200:
         return
@@ -110,23 +115,22 @@ def getDataFromURL(url: str) -> list[list[str]]:
 
     return data
 
-# неважная часть закончилась
-# важная часть началась
 
 def getDataFromMultiplePages(numOfPages: int) -> list[list[str]]:
+    '''
+    Enter number of pages to parse(1 page = 50 rows of data)
+    '''
     baseurl = ['https://www.scimagojr.com/journalrank.php?page=', '&total_size=32958']
     data = []
     for i in range(1, numOfPages + 1):
         url = baseurl[0] + str(i) + baseurl[1]
-        print(url)
-        data.extend(getData(url))
+        data.extend(getDataFromURL(url))
 
     return data
 
 url = 'https://www.scimagojr.com/journalrank.php?page=1&total_size=32958'
 
-data = getDataFromURL(url)
-
+data = getDataFromMultiplePages(2)
 
 for i in data:
     print(i)
