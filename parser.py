@@ -6,7 +6,7 @@ def getTitle(raw) -> str:
     t = raw[1].__str__()
     t = t.split("<")
     t = t[2].split(">")
-    return t[-1]
+    return t[-1].replace(',','.')
 
 
 def getType(raw) -> str:
