@@ -70,7 +70,7 @@ def getCountry(raw) -> str:
 def getData(raw: list[str]) -> list[str]:
     '''
     Главная функция, возвращает данные в виде списка с такими елементами:
-    Title, type, SJR, H index, Tolal docs(2020), Total dosc(3 years), Total refs.(2020), Total cities(3 years),
+    Title, Type, SJR, H index, Tolal docs(2020), Total dosc(3 years), Total refs.(2020), Total cities(3 years),
     0      1     2    3        4                 5                    6                  7
     Citable docs(3 years), Cities/docs(2 years), Ref/docs(2020), Country
     8                      9                     10               11
@@ -130,8 +130,11 @@ def getDataFromMultiplePages(numOfPages: int) -> list[list[str]]:
 
 def saveToCSV(data: list[list[str]]):
     file = open('data.csv', 'w')
+    file.write("Title, Type, SJR, H index, Tolal docs(2020), Total dosc(3 years), Total refs.(2020),\
+ Total cities(3 years), Citable docs(3 years), Cities/docs(2 years), Ref/docs(2020), Country\n")
+
     for i in data:
-        file.write(','.join(i))
+        file.write(', '.join(i))
         file.write('\n')
     file.close()
     print("saved")
