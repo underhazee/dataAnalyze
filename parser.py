@@ -128,9 +128,16 @@ def getDataFromMultiplePages(numOfPages: int) -> list[list[str]]:
 
     return data
 
+def saveToCSV(data: list[list[str]]):
+    file = open('data.csv', 'w')
+    for i in data:
+        file.write(','.join(i))
+        file.write('\n')
+    file.close()
+    print("saved")
+
 url = 'https://www.scimagojr.com/journalrank.php?page=1&total_size=32958'
 
-data = getDataFromMultiplePages(2)
+data = getDataFromMultiplePages(1)
 
-for i in data:
-    print(i)
+saveToCSV(data)
