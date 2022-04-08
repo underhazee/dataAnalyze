@@ -1,5 +1,5 @@
 # dataAnalyze
-**User guide (EN):**  
+## User guide (EN):  
 This is project to collect, analyze, build diagramm and save them in pdf format.
 
 **How to start working:**
@@ -24,7 +24,7 @@ This is project to collect, analyze, build diagramm and save them in pdf format.
 3. Press "contribute" then "open pull request".
 4. Follow instructions.
 
-**Інструкція з використання (UA):**  
+## Інструкція з використання (UA):  
 Цей проект створений для збирання, аналізу, створення діаграм та збереження їх у форматі pdf.
 
 **Для початку роботи необхідно:**
@@ -49,5 +49,5 @@ This is project to collect, analyze, build diagramm and save them in pdf format.
 3. Натисніть "contribute", потім - "open pull request".
 4. Виконуйте вказані там інструкції.
 
-**Инструкция по использоваию (ru):**  
+## Инструкция по использоваию (ru):  
 Учи українську мову.
