@@ -1,7 +1,10 @@
+from turtle import width
 from bs4 import BeautifulSoup
+from fpdf import FPDF
 import requests
 import pandas as pd
 import matplotlib.pyplot as plt
+import os 
 
 # неважная часть началась
 def getTitle(raw) -> str:
@@ -140,12 +143,48 @@ Total cities(3 years),Citable docs(3 years),Cities/docs(2 years),Ref/docs(2020),
         file.write('\n')
     file.close()
 
+ 
+def installer_png_to_pdf(list_name_png: list[str]): 
+    pdf = FPDF() 
+    
+    size=len(list_name_png) 
+    for nom in range(size): 
+        pdf.add_page() 
+        pdf.image(list_name_png[nom], x = 0, y = None, w = 0, h = 0, type = '', link = '') 
+     
+    pdf.output('data.pdf', 'F') 
+ 
+
+def deletePNG(pngList: list[str]):
+    for i in pngList:
+        os.remove(i)
+
 
 #data = getDataFromMultiplePages(10)
 #saveToCSV(data)
 
+pngList = []
+
 frame = pd.read_csv("data.csv")
-#print(frame.columns)
 ax = plt.gca()
-frame.groupby('Country')['Title'].nunique().plot(kind='bar', color='green', title='Total publications by country', ax=ax)
-plt.savefig('TotalPubli.png')
+frame.groupby('Country')['Title'].nunique().plot(kind='bar', color='#20C1ED', title='Total publications by country', ax=ax)
+plt.savefig('TotalPublication.png')
+pngList.append('TotalPublication.png')
+
+ax.clear()
+frame.groupby('Type')['Title'].nunique().plot(kind='line', title='Total types', ax=ax)
+plt.savefig('TotalTypes.png')
+pngList.append('TotalTypes.png')
+
+ax.clear()
+frame[['Total docs(2020)','H index']].plot(kind='scatter', x='H index', y='Total docs(2020)', title='Total docs(2020) to H index', color='#20C1ED', ax=ax)
+plt.savefig('Total docs(2020) to H index.png')
+pngList.append('Total docs(2020) to H index.png')
+
+ax.clear()
+frame[['Total docs(3 years)','H index']].plot(kind='scatter', x='H index', y='Total docs(3 years)', title='Total docs(3 years) to H index', color='#20C1ED', ax=ax)
+plt.savefig('Total docs(3 years) to H index.png')
+pngList.append('Total docs(3 years) to H index.png')
+
+installer_png_to_pdf(pngList)
+#deletePNG(pngList)
