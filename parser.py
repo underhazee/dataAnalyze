@@ -1,5 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
+import pandas as pd
+import matplotlib.pyplot as plt
 
 # неважная часть началась
 def getTitle(raw) -> str:
@@ -130,17 +132,20 @@ def getDataFromMultiplePages(numOfPages: int) -> list[list[str]]:
 
 def saveToCSV(data: list[list[str]]):
     file = open('data.csv', 'w')
-    file.write("Title, Type, SJR, H index, Tolal docs(2020), Total dosc(3 years), Total refs.(2020),\
- Total cities(3 years), Citable docs(3 years), Cities/docs(2 years), Ref/docs(2020), Country\n")
+    file.write("Title,Type,SJR,H index,Total docs(2020),Total docs(3 years),Total refs(2020),\
+Total cities(3 years),Citable docs(3 years),Cities/docs(2 years),Ref/docs(2020),Country\n")
 
     for i in data:
-        file.write(', '.join(i))
+        file.write(','.join(i))
         file.write('\n')
     file.close()
-    print("saved")
 
-url = 'https://www.scimagojr.com/journalrank.php?page=1&total_size=32958'
 
-data = getDataFromMultiplePages(1)
+#data = getDataFromMultiplePages(10)
+#saveToCSV(data)
 
-saveToCSV(data)
+frame = pd.read_csv("data.csv")
+#print(frame.columns)
+ax = plt.gca()
+frame.groupby('Country')['Title'].nunique().plot(kind='bar', color='green', title='Total publications by country', ax=ax)
+plt.savefig('TotalPubli.png')
